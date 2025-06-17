@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Extra Notes Management" icon-name="standard:note">
+        <div class="slds-m-around_medium">
+            <!-- Enable Editing Checkbox -->
+            <lightning-input 
+                type="checkbox" 
+                label="Enable Editing" 
+                checked={isEditingEnabled}
+                onchange={handleEditToggle}>
+            </lightning-input>
+            
+            <!-- Extra Notes Field -->
+            <div class="slds-m-top_medium">
+                <lightning-textarea 
+                    label="Extra Notes"
+                    value={extraNotes}
+                    onchange={handleNotesChange}
+                    disabled={isReadOnly}
+                    placeholder="Enter additional notes here..."
+                    max-length="255">
+                </lightning-textarea>
+            </div>
+            
+            <!-- Save Button (only when editing) -->
+            <div if:true={isEditingEnabled} class="slds-m-top_medium">
+                <lightning-button 
+                    label="Save Notes" 
+                    variant="brand"
+                    onclick={handleSave}
+                    disabled={isSaving}>
+                </lightning-button>
+            </div>
+            
+            <!-- Status Messages -->
+            <div if:true={message} class="slds-m-top_small">
+                <div class={messageClass}>
+                    {message}
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>
